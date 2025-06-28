@@ -23,7 +23,7 @@ class TicketResource extends JsonResource
             'priority' => $this->priority,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'user' => $this->user,
+            'user' => new UserResource($this->user),
             'completed_at' => $this->completed_at,
         ];
     }
