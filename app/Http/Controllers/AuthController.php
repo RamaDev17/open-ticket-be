@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterStoreRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,7 @@ class AuthController extends Controller
                 'message' => 'Login successful',
                 'data' => [
                     'token' => $token,
-                    'user' => $user,
+                    'user' => new UserResource($user),
                 ],
             ], 200);
         } catch (\Exception $e) {
@@ -49,7 +50,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User retrieved successfully',
-                'data' => $user,
+                'data' => new UserResource($user),
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
@@ -98,7 +99,7 @@ class AuthController extends Controller
             return response()->json([
                 "message"=> "register success",
                 "data" => [
-                    'user' => $user,
+                    'user' => new UserResource($user),
                     'token' => $token
                 ],
             ]);
